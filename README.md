@@ -1,8 +1,8 @@
-# @hzzzzzz/openclaw-easy
+# @zi.yi/openclaw-easy
 
-[![npm version](https://badge.fury.io/js/@hzzzzzz%2Fopenclaw-easy.svg)](https://www.npmjs.com/package/@hzzzzzz/openclaw-easy)
+[![npm version](https://badge.fury.io/js/@hzzzzzz%2Fopenclaw-easy.svg)](https://www.npmjs.com/package/@zi.yi/openclaw-easy)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Install Size](https://packagephobia.com/badge?p=@hzzzzzz/openclaw-easy)](https://packagephobia.com/result?p=@hzzzzzz/openclaw-easy)
+[![Install Size](https://packagephobia.com/badge?p=@zi.yi/openclaw-easy)](https://packagephobia.com/result?p=@zi.yi/openclaw-easy)
 
 > **One-command setup for [OpenClaw](https://github.com/anthropics/openclaw) with built-in API key.**
 
@@ -20,7 +20,7 @@ OpenClaw 是一个自托管 AI 助手网关，可以连接 WhatsApp、Telegram�
 ### 安装
 
 ```bash
-npm install -g @hzzzzzz/openclaw-easy
+npm install -g @zi.yi/openclaw-easy
 ```
 
 ### 使用
@@ -78,7 +78,7 @@ A: 编辑 `~/.openclaw/.env`，修改 `OPENCLAW_MODEL` 环境变量。
 ### Q: 卸载怎么办？
 
 ```bash
-npm uninstall -g @hzzzzzz/openclaw-easy
+npm uninstall -g @zi.yi/openclaw-easy
 npx openclaw uninstall  # 完全卸载 OpenClaw
 ```
 

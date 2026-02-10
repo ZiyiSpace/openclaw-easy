@@ -103,7 +103,7 @@ function updateOpenClawConfig(model) {
     };
 
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
-    console.log("\n✓ 已配置模型: %s", modelKey);
+    console.log("\n✓ 已使用内置免费模型");
   } catch (err) {
     console.error("警告: 无法更新 OpenClaw 配置:", err.message);
   }
@@ -120,7 +120,7 @@ async function main() {
   if (userApiKey) {
     console.log("\n检测到你提供了自己的 API key。");
     console.log("  [1] 使用你自己的 API key");
-    console.log("  [2] 使用内置的福利 API key（%s)", builtinConfig.model);
+    console.log("  [2] 使用内置的免费 API key");
 
     const choice = await askQuestion("\n请选择 [1/2]（默认 1）：");
 
@@ -135,7 +135,7 @@ async function main() {
     }
   } else {
     finalApiKey = builtinConfig.apiKey;
-    console.log("\n✓ 使用内置福利 API key (%s)", builtinConfig.model);
+    console.log("\n✓ 使用内置免费 API key");
   }
 
   // 写入 .env 文件

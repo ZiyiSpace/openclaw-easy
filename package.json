@@ -1,6 +1,6 @@
 {
-  "name": "@hzzzzzz/openclaw-easy",
-  "version": "0.2.2",
+  "name": "@zi.yi/openclaw-easy",
+  "version": "1.0.0",
   "description": "One-command setup for OpenClaw with built-in API key",
   "type": "module",
   "bin": {

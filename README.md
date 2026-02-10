@@ -32,7 +32,7 @@ openclaw-easy
 ```
 
 默认配置：
-- 模型：`arcee-ai/trinity-large-preview:free`（通过 zai provider）
+- 模型：`arcee-ai/trinity-large-preview:free`
 
 **方式二：使用自己的 API key**
 

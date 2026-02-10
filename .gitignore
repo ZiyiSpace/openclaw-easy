@@ -24,3 +24,6 @@ Thumbs.db
 # 环境变量
 .env
 .env.local
+
+# 公众号文章
+公众号文章*.md

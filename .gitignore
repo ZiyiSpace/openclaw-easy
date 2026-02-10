@@ -1,0 +1,26 @@
+# 配置文件（包含加密的 API key）
+lib/config.json
+
+# 依赖
+node_modules/
+
+# 日志
+*.log
+npm-debug.log*
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 构建产物
+*.tgz
+
+# 环境变量
+.env
+.env.local

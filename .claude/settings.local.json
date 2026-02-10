@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(echo:*)",
+      "Bash(source:*)",
+      "Bash(alias claude)",
+      "Bash(npm install:*)"
+    ]
+  }
+}

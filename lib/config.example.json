@@ -1,0 +1,7 @@
+{
+  "_comment": "这是配置示例，实际使用时请复制为 config.json 并填入真实值",
+  "_note": "使用 node scripts/encrypt-config.mjs <api-key> <model> 生成加密配置",
+  "apiKey": "加密后的API密钥(base64)",
+  "model": "加密后的模型名(base64)",
+  "provider": "moonshot"
+}

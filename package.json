@@ -1,0 +1,32 @@
+{
+  "name": "@hzzzzzz/openclaw-easy",
+  "version": "0.1.2",
+  "description": "One-command setup for OpenClaw with OpenAI API key",
+  "type": "module",
+  "bin": {
+    "openclaw-easy": "bin/openclaw-easy.mjs"
+  },
+  "scripts": {
+    "prepack": "node scripts/prepack.mjs",
+    "postpack": "rm -f lib/config.json",
+    "test": "node bin/openclaw-easy.mjs --help"
+  },
+  "dependencies": {
+    "openclaw": "^2026.2.9"
+  },
+  "keywords": [
+    "openclaw",
+    "cli",
+    "setup",
+    "openai"
+  ],
+  "author": "王子怡 (Ziyi Wang) <3597792204@qq.com> (https://github.com/hzzzzz-1)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "bin/",
+    "lib/"
+  ]
+}

@@ -69,7 +69,7 @@ npx openclaw agent --message "你好"
 
 ### Q: 内置的是什么模型？
 
-A: 内置的是 OpenRouter Trinity 模型（通过 zai provider），适合日常使用。
+A: 内置的是 OpenRouter Trinity 模型，适合日常使用。
 
 ### Q: 如何更换模型？
 

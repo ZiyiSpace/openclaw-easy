@@ -12,9 +12,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // 内部密钥（混淆）
 const _k = "openclaw-easy-secret-2026";
-const _0 = "d";
-const _1 = "m";
-const _2 = "v";
+const _0 = "d";  // API key
+const _1 = "m";  // model
+const _2 = "v";  // version
 
 // 解密函数（与加密工具对应）
 const _d = (s) => {
@@ -68,6 +68,47 @@ const arg = (name) => {
   return i >= 0 ? process.argv[i + 1] : undefined;
 };
 
+// 更新 OpenClaw 配置文件，设置模型
+function updateOpenClawConfig(model) {
+  const configPath = path.join(os.homedir(), ".openclaw", "openclaw.json");
+
+  try {
+    if (!fs.existsSync(configPath)) {
+      return;
+    }
+
+    const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
+
+    // 模型 provider 映射
+    let modelKey;
+    if (model.includes("trinity")) {
+      modelKey = `openrouter/${model}`;
+    } else if (model.startsWith("glm")) {
+      modelKey = `zai/glm-4-flash`;
+    } else if (model.startsWith("gpt")) {
+      modelKey = `openai/${model}`;
+    } else {
+      modelKey = model;
+    }
+
+    config.agents = config.agents || {};
+    config.agents.defaults = config.agents.defaults || {};
+    config.agents.defaults.models = {
+      [modelKey]: {
+        "alias": modelKey.includes("trinity") ? "Trinity" : modelKey.startsWith("zai") ? "GLM" : "GPT"
+      }
+    };
+    config.agents.defaults.model = {
+      "primary": modelKey
+    };
+
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+    console.log("\n✓ 已配置模型: %s", modelKey);
+  } catch (err) {
+    console.error("警告: 无法更新 OpenClaw 配置:", err.message);
+  }
+}
+
 // 主流程
 async function main() {
   const builtinConfig = getBuiltinConfig();
@@ -89,24 +130,75 @@ async function main() {
     } else {
       finalApiKey = userApiKey;
       console.log("\n✓ 使用你提供的 API key");
+      // 用户用自己的 key，不强制使用 GLM 配置
+      finalModel = null;
     }
   } else {
     finalApiKey = builtinConfig.apiKey;
     console.log("\n✓ 使用内置福利 API key (%s)", builtinConfig.model);
   }
 
-  // 写入配置文件
+  // 写入 .env 文件
   const envFile = path.join(os.homedir(), ".openclaw", ".env");
   fs.mkdirSync(path.dirname(envFile), { recursive: true });
 
   const lines = fs.existsSync(envFile) ? fs.readFileSync(envFile, "utf8").split(/\r?\n/) : [];
-  const next = lines.filter((line) => !line.startsWith("OPENAI_API_KEY=") && !line.startsWith("OPENCLAW_MODEL="));
-  next.push(`OPENAI_API_KEY=${finalApiKey}`);
-  next.push(`OPENCLAW_MODEL=${finalModel}`);
+
+  // 过滤掉旧的配置行（包括看起来像是 API key 延续的行）
+  const next = [];
+  let skipNext = false;
+  for (const line of lines) {
+    if (skipNext) {
+      skipNext = false;
+      continue;
+    }
+    if (line.startsWith("OPENAI_API_KEY=") ||
+        line.startsWith("OPENROUTER_API_KEY=") ||
+        line.startsWith("ZAI_API_KEY=") ||
+        line.startsWith("OPENCLAW_MODEL=")) {
+      // 如果这行以 = 结尾但没有内容，可能是换行的 key，跳过下一行
+      if (line.endsWith("=") || line.match(/KEY=$/)) {
+        skipNext = true;
+      }
+      continue;
+    }
+    // 跳过看起来像是 API key 延续的行（不以 = 开头且像 base64/key 格式）
+    if (line.match(/^[a-zA-Z0-9_-]{20,}$/) && !line.includes("=")) {
+      continue;
+    }
+    next.push(line);
+  }
+
+  // 根据模型选择对应的环境变量
+  if (finalModel && finalModel.includes("trinity")) {
+    next.push(`OPENROUTER_API_KEY=${finalApiKey}`);
+    next.push(`OPENCLAW_MODEL=openrouter/${finalModel}`);
+  } else if (finalModel && finalModel.startsWith("glm")) {
+    next.push(`ZAI_API_KEY=${finalApiKey}`);
+    next.push(`OPENCLAW_MODEL=zai/glm-4-flash`);
+  } else {
+    next.push(`OPENAI_API_KEY=${finalApiKey}`);
+    if (finalModel) {
+      next.push(`OPENCLAW_MODEL=${finalModel}`);
+    }
+  }
   fs.writeFileSync(envFile, `${next.filter(Boolean).join("\n")}\n`, "utf8");
 
-  // 调用 OpenClaw
+  // 调用 OpenClaw onboard
   const openclawCli = require.resolve("openclaw/cli-entry");
+
+  // 根据模型选择认证方式和 API key 参数
+  let authChoice = "openai-api-key";
+  let apiKeyParam = "--openai-api-key";
+
+  if (finalModel && finalModel.includes("trinity")) {
+    authChoice = "openrouter-api-key";
+    apiKeyParam = "--openrouter-api-key";
+  } else if (finalModel && finalModel.startsWith("glm")) {
+    authChoice = "zai-api-key";
+    apiKeyParam = "--zai-api-key";
+  }
+
   const run = spawnSync(
     process.execPath,
     [
@@ -117,11 +209,41 @@ async function main() {
       "--flow",
       "quickstart",
       "--auth-choice",
-      "openai-api-key",
+      authChoice,
+      apiKeyParam,
+      finalApiKey,
       "--install-daemon"
     ],
-    { stdio: "inherit", env: { ...process.env, OPENAI_API_KEY: finalApiKey, OPENCLAW_MODEL: finalModel } }
+    {
+      stdio: "inherit",
+      env: {
+        ...process.env,
+        ...(finalModel && {
+          OPENCLAW_MODEL: finalModel.includes("trinity")
+            ? `openrouter/${finalModel}`
+            : finalModel.startsWith("glm")
+            ? "zai/glm-4-flash"
+            : finalModel
+        })
+      }
+    }
   );
+
+  // 如果使用内置配置，更新 openclaw.json
+  if (finalModel && run.status === 0) {
+    updateOpenClawConfig(finalModel);
+
+    // 停止 gateway（LaunchAgent 会自动重启）
+    console.log("\n正在重启 OpenClaw Gateway...");
+    spawnSync(
+      process.execPath,
+      [openclawCli, "gateway", "--stop"],
+      { stdio: "inherit" }
+    );
+    console.log("\n✓ 配置完成！Gateway 正在自动启动...");
+    console.log("\n运行以下命令打开控制面板：");
+    console.log("  npx openclaw dashboard");
+  }
 
   process.exit(run.status ?? 1);
 }

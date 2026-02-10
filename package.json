@@ -1,7 +1,7 @@
 {
   "name": "@hzzzzzz/openclaw-easy",
-  "version": "0.1.2",
-  "description": "One-command setup for OpenClaw with OpenAI API key",
+  "version": "0.2.1",
+  "description": "One-command setup for OpenClaw with built-in API key",
   "type": "module",
   "bin": {
     "openclaw-easy": "bin/openclaw-easy.mjs"

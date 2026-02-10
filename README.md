@@ -4,9 +4,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Install Size](https://packagephobia.com/badge?p=@hzzzzzz/openclaw-easy)](https://packagephobia.com/result?p=@hzzzzzz/openclaw-easy)
 
-> **One-command setup for [OpenClaw](https://github.com/anthropics/openclaw) with built-in free API key.**
+> **One-command setup for [OpenClaw](https://github.com/anthropics/openclaw) with built-in API key.**
 
-OpenClaw 是一个自托管 AI 助手网关，可以连接 WhatsApp、Telegram、Discord 等聊天应用到 AI 编码助手。这个工具让你一键完成配置，无需注册账号或购买 API key。
+OpenClaw 是一个自托管 AI 助手网关，可以连接 WhatsApp、Telegram、Discord 等聊天应用到 AI 编码助手。这个工具让你一键完成配置，内置 GLM-4-Flash 模型。
 
 ## 特点
 
@@ -30,6 +30,9 @@ npm install -g @hzzzzzz/openclaw-easy
 ```bash
 openclaw-easy
 ```
+
+默认配置：
+- 模型：`glm-4-flash`（通过 zai provider）
 
 **方式二：使用自己的 API key**
 
@@ -58,15 +61,15 @@ npx openclaw agent --message "你好"
 ## 工作原理
 
 1. 从内置配置或用户输入获取 API key
-2. 将 API key 写入 `~/.openclaw/.env`
+2. 将配置写入 `~/.openclaw/.env`（API key、模型）
 3. 运行 OpenClaw 的 onboarding 流程
 4. 安装并启动 OpenClaw 守护进程
 
 ## 常见问题
 
-### Q: 内置的 API key 有使用限制吗？
+### Q: 内置的是什么模型？
 
-A: 内置的是 Kimi AI (kimi-k2.5) 模型，适合日常使用。如有更高需求，建议使用自己的 API key。
+A: 内置的是 GLM-4-Flash 模型（通过 zai provider），适合日常使用。
 
 ### Q: 如何更换模型？
 
@@ -98,13 +101,13 @@ npm install -g .
 openclaw-easy
 
 # 发布到 npm（需要设置环境变量）
-BUILTIN_API_KEY="your-api-key" npm publish --access public
+BUILTIN_API_KEY="your-api-key" BUILTIN_MODEL="glm-4.7-flash" npm publish --access public
 ```
 
 ## 致谢
 
 - [OpenClaw](https://github.com/anthropics/openclaw) - 核心项目
-- [Kimi AI](https://kimi.moonshot.cn/) - 提供内置 API 支持
+- [GLM](https://open.bigmodel.cn/) - 提供内置 API 支持
 
 ## GitHub 仓库
 

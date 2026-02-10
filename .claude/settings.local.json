@@ -4,7 +4,9 @@
       "Bash(echo:*)",
       "Bash(source:*)",
       "Bash(alias claude)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(PATH=\"/opt/homebrew/bin:$PATH\" npx openclaw agent --message \"你好，请用中文回复：1+1等于几？\")",
+      "Bash(PATH=\"/opt/homebrew/bin:$PATH\" timeout 10 npx openclaw dashboard)"
     ]
   }
 }

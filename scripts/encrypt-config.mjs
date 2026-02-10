@@ -2,6 +2,9 @@
 /**
  * 配置加密工具 - 加强版
  * 使用 XOR 加密 + base64 编码
+ *
+ * 使用方法：
+ *   node scripts/encrypt-config.mjs <api-key> <model> [thinking]
  */
 
 import fs from "node:fs";
@@ -34,14 +37,16 @@ function encrypt(str) {
 // 从命令行获取参数
 const args = process.argv.slice(2);
 const apiKey = args[0];
-const model = args[1] || "kimi-k2.5";
+const model = args[1] || "glm-4.7-flash";
+const thinking = args[2] || "high";  // 默认高思考模式
 
 if (!apiKey) {
   console.log("\n配置加密工具（加强版）\n");
   console.log("使用方法：");
-  console.log("  node scripts/encrypt-config.mjs <api-key> [model]");
+  console.log("  node scripts/encrypt-config.mjs <api-key> [model] [thinking]");
   console.log("\n示例：");
-  console.log("  node scripts/encrypt-config.mjs nvapi-xxxxx kimi-k2.5");
+  console.log("  node scripts/encrypt-config.mjs c3fbae1a... glm-4.7-flash high");
+  console.log("\n思考模式选项：low, medium, high（默认 high）");
   process.exit(1);
 }
 
@@ -49,6 +54,7 @@ if (!apiKey) {
 const config = {
   d: encrypt(apiKey),      // 'd' for data (obfuscated name)
   m: encrypt(model),       // 'm' for model
+  t: encrypt(thinking),    // 't' for thinking level
   v: "1"                   // version
 };
 
@@ -64,3 +70,6 @@ fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
 console.log("✓ 已更新 lib/config.json");
 console.log(`✓ 配置文件路径: ${configPath}`);
 console.log("✓ 加密方式: XOR + base64");
+console.log(`✓ API Key: ${apiKey.substring(0, 15)}...`);
+console.log(`✓ 模型: ${model}`);
+console.log(`✓ 思考模式: ${thinking}`);

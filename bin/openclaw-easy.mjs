@@ -130,7 +130,7 @@ async function main() {
     } else {
       finalApiKey = userApiKey;
       console.log("\n✓ 使用你提供的 API key");
-      // 用户用自己的 key，不强制使用 GLM 配置
+      // 用户用自己的 key，不强制使用内置模型配置
       finalModel = null;
     }
   } else {

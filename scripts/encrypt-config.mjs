@@ -37,7 +37,7 @@ function encrypt(str) {
 // 从命令行获取参数
 const args = process.argv.slice(2);
 const apiKey = args[0];
-const model = args[1] || "glm-4.7-flash";
+const model = args[1] || "arcee-ai/trinity-large-preview:free";
 const thinking = args[2] || "high";  // 默认高思考模式
 
 if (!apiKey) {
@@ -45,7 +45,7 @@ if (!apiKey) {
   console.log("使用方法：");
   console.log("  node scripts/encrypt-config.mjs <api-key> [model] [thinking]");
   console.log("\n示例：");
-  console.log("  node scripts/encrypt-config.mjs c3fbae1a... glm-4.7-flash high");
+  console.log("  node scripts/encrypt-config.mjs c3fbae1a... arcee-ai/trinity-large-preview:free high");
   console.log("\n思考模式选项：low, medium, high（默认 high）");
   process.exit(1);
 }

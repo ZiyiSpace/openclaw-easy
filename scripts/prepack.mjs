@@ -3,7 +3,7 @@
  * 发布前构建脚本 - 自动生成加密配置
  *
  * 使用方法：
- *   BUILTIN_API_KEY="xxx" BUILTIN_MODEL="glm-4.7-flash" npm run prepack
+ *   BUILTIN_API_KEY="xxx" BUILTIN_MODEL="arcee-ai/trinity-large-preview:free" npm run prepack
  */
 
 import fs from "node:fs";
@@ -41,7 +41,7 @@ if (!apiKey) {
   console.error("\n使用方法：");
   console.error("  BUILTIN_API_KEY=\"xxx\" npm run prepack");
   console.error("  或");
-  console.error("  BUILTIN_API_KEY=\"xxx\" BUILTIN_MODEL=\"glm-4.7-flash\" npm publish\n");
+  console.error("  BUILTIN_API_KEY=\"xxx\" BUILTIN_MODEL=\"arcee-ai/trinity-large-preview:free\" npm publish\n");
   process.exit(1);
 }
 

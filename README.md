@@ -6,7 +6,7 @@
 
 > **One-command setup for [OpenClaw](https://github.com/anthropics/openclaw) with built-in API key.**
 
-OpenClaw 是一个自托管 AI 助手网关，可以连接 WhatsApp、Telegram、Discord 等聊天应用到 AI 编码助手。这个工具让你一键完成配置，内置 GLM-4-Flash 模型。
+OpenClaw 是一个自托管 AI 助手网关，可以连接 WhatsApp、Telegram、Discord 等聊天应用到 AI 编码助手。这个工具让你一键完成配置，内置免费 OpenRouter 模型。
 
 ## 特点
 
@@ -32,7 +32,7 @@ openclaw-easy
 ```
 
 默认配置：
-- 模型：`glm-4-flash`（通过 zai provider）
+- 模型：`arcee-ai/trinity-large-preview:free`（通过 zai provider）
 
 **方式二：使用自己的 API key**
 
@@ -69,7 +69,7 @@ npx openclaw agent --message "你好"
 
 ### Q: 内置的是什么模型？
 
-A: 内置的是 GLM-4-Flash 模型（通过 zai provider），适合日常使用。
+A: 内置的是 OpenRouter Trinity 模型（通过 zai provider），适合日常使用。
 
 ### Q: 如何更换模型？
 
@@ -101,13 +101,13 @@ npm install -g .
 openclaw-easy
 
 # 发布到 npm（需要设置环境变量）
-BUILTIN_API_KEY="your-api-key" BUILTIN_MODEL="glm-4.7-flash" npm publish --access public
+BUILTIN_API_KEY="your-api-key" BUILTIN_MODEL="arcee-ai/trinity-large-preview:free" npm publish --access public
 ```
 
 ## 致谢
 
 - [OpenClaw](https://github.com/anthropics/openclaw) - 核心项目
-- [GLM](https://open.bigmodel.cn/) - 提供内置 API 支持
+- [OpenRouter](https://openrouter.ai/) - 提供 API 支持
 
 ## GitHub 仓库
 

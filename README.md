@@ -90,7 +90,7 @@ npx openclaw uninstall  # 完全卸载 OpenClaw
 
 ```bash
 # 克隆仓库
-git clone https://github.com/hzzzzz-1/openclaw-easy.git
+git clone https://github.com/ZiyiSpace/openclaw-easy.git
 cd openclaw-easy
 
 # 安装依赖
@@ -111,7 +111,7 @@ BUILTIN_API_KEY="your-api-key" BUILTIN_MODEL="glm-4.7-flash" npm publish --acces
 
 ## GitHub 仓库
 
-https://github.com/hzzzzz-1/openclaw-easy
+https://github.com/ZiyiSpace/openclaw-easy
 
 ## License
 

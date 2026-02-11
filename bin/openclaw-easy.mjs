@@ -247,18 +247,15 @@ async function main() {
 
     if (isWindows) {
       // Windows：手动启动提示
-      console.log("\n✓ 配置完成！");
       console.log("\n" + "=".repeat(50));
-      console.log("Windows 用户请手动启动：");
+      console.log("                    📋 接下来的步骤");
       console.log("=".repeat(50));
-      console.log("\n【第一步】在当前终端启动 Gateway：");
-      console.log("  npx openclaw gateway");
-      console.log("\n⚠️  请保持此终端窗口开启，关闭会停止服务");
-      console.log("\n【第二步】打开新的终端，启动控制面板：");
-      console.log("  npx openclaw dashboard");
-      console.log("\n" + "=".repeat(50));
-      console.log("💡 提示：推荐使用 WSL2 获得完整的后台运行体验");
-      console.log("=".repeat(50) + "\n");
+      console.log("\n【1️⃣ 当前终端】复制并运行：");
+      console.log("   npx openclaw gateway");
+      console.log("\n   ⚠️  此窗口保持开启，关闭会停止服务");
+      console.log("\n【2️⃣ 打开新终端】复制并运行：");
+      console.log("   npx openclaw dashboard");
+      console.log("\n" + "=".repeat(50) + "\n");
     } else {
       // macOS/Linux：自动重启
       console.log("\n正在重启 OpenClaw Gateway...");

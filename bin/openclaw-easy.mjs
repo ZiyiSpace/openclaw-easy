@@ -48,7 +48,7 @@ function getBuiltinConfig() {
       version: _c[_2]
     };
   } catch (err) {
-    console.error("Configuration error. Please reinstall:\n  npm install -g \"@zi.yi/openclaw-easy@latest\"");
+    console.error("Configuration error. Please reinstall:\n  npm install -g @hzzzzzz/openclaw-easy");
     process.exit(1);
   }
 }

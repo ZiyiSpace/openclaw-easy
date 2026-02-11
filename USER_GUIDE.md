@@ -70,13 +70,13 @@ openclaw-easy --openai-key sk-你的key
 
 ### Windows
 
-由于 Windows 原生不支持守护进程，需要手动启动：
+配置完成后 **Gateway 会自动启动**（版本 1.0.6+）：
 
 ```bash
-# 终端1：启动 Gateway（保持开启）
-npx openclaw gateway
+# 终端1：自动运行中（保持开启）
+# Gateway 已在运行，无需手动启动
 
-# 终端2：打开控制面板
+# 打开新终端，运行控制面板
 npx openclaw dashboard
 ```
 

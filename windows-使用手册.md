@@ -28,6 +28,23 @@ npm install -g "@zi.yi/openclaw-easy@latest"
 openclaw-easy
 ```
 
+**配置完成后，Gateway 会自动启动！**（版本 1.0.6+）
+
+---
+
+#### 开始使用
+
+**终端 1**（Gateway 自动运行中）：
+- Gateway 已启动并运行
+- ⚠️ 此窗口保持开启，关闭会停止服务
+
+**终端 2**（打开新终端）：
+```bash
+npx openclaw dashboard
+```
+
+浏览器会自动打开控制面板，开始对话！
+
 #### 手动启动（需要两个终端）
 
 **终端 1 - 启动 Gateway**
@@ -78,7 +95,7 @@ wsl --install
 wsl
 
 # 安装和使用
-npm install -g @zi.yi/openclaw-easy
+npm install -g "@zi.yi/openclaw-easy@latest"
 openclaw-easy
 
 # 后续使用与 macOS 相同

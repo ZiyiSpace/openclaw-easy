@@ -1,8 +1,8 @@
 # @zi.yi/openclaw-easy
 
-[![npm version](https://badge.fury.io/js/@hzzzzzz%2Fopenclaw-easy.svg)](https://www.npmjs.com/package/@zi.yi/openclaw-easy)
+[![npm version](https://badge.fury.io/js/@zi.yi%2Fopenclaw-easy.svg)](https://www.npmjs.com/package/@zi.yi/openclaw-easy)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Install Size](https://packagephobia.com/badge?p=@zi.yi/openclaw-easy)](https://packagephobia.com/result?p=@zi.yi/openclaw-easy)
+[![Install Size](https://packagephobia.com/badge?p=@zi.yi%2Fopenclaw-easy)](https://packagephobia.com/result?p=@zi.yi%2Fopenclaw-easy)
 
 > **One-command setup for [OpenClaw](https://github.com/anthropics/openclaw) with built-in API key.**
 
@@ -77,6 +77,13 @@ npx openclaw agent --message "你好"
 4. 安装并启动 OpenClaw 守护进程
 
 ## 常见问题
+
+### Q: 如何更新到最新版本？
+
+A: 重新安装即可：
+```bash
+npm install -g "@zi.yi/openclaw-easy@latest"
+```
 
 ### Q: 内置的是什么模型？
 

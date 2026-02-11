@@ -249,16 +249,22 @@ async function main() {
     updateOpenClawConfig(finalModel);
 
     if (isWindows) {
-      // Windows：手动启动提示
+      // Windows：自动启动 Gateway（前台运行）
       console.log("\n" + "=".repeat(50));
-      console.log("                    📋 接下来的步骤");
+      console.log("                    ✅ 配置完成！");
       console.log("=".repeat(50));
-      console.log("\n【1️⃣ 当前终端】复制并运行：");
-      console.log("   npx openclaw gateway");
-      console.log("\n   ⚠️  此窗口保持开启，关闭会停止服务");
-      console.log("\n【2️⃣ 打开新终端】复制并运行：");
-      console.log("   npx openclaw dashboard");
+      console.log("\n正在启动 OpenClaw Gateway...");
+      console.log("⚠️  请保持此窗口开启，关闭会停止服务\n");
+      console.log("打开新终端，运行以下命令打开控制面板：");
+      console.log("  npx openclaw dashboard");
       console.log("\n" + "=".repeat(50) + "\n");
+
+      // 直接启动 Gateway（阻塞式）
+      spawnSync(
+        process.execPath,
+        [openclawCli, "gateway"],
+        { stdio: "inherit" }
+      );
     } else {
       // macOS/Linux：自动重启
       console.log("\n正在重启 OpenClaw Gateway...");

@@ -221,6 +221,9 @@ async function main() {
   // 仅在非 Windows 平台安装守护进程
   if (!isWindows) {
     args.push("--install-daemon");
+  } else {
+    // Windows 跳过健康检查（因为没有守护进程）
+    args.push("--skip-health");
   }
 
   const run = spawnSync(
@@ -261,7 +264,7 @@ async function main() {
       console.log("\n正在重启 OpenClaw Gateway...");
       spawnSync(
         process.execPath,
-        [openclawCli, "gateway", "--stop"],
+        [openclawCli, "gateway", "stop"],
         { stdio: "inherit" }
       );
       console.log("\n✓ 配置完成！Gateway 正在自动启动...");

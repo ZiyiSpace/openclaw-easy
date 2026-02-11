@@ -24,7 +24,7 @@ OpenClaw 的守护进程功能依赖 Unix 系统（macOS/Linux）：
 #### 安装配置
 
 ```bash
-npm install -g "@zi.yi/openclaw-easy"
+npm install -g "@zi.yi/openclaw-easy@latest"
 openclaw-easy
 ```
 

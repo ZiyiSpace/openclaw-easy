@@ -31,7 +31,7 @@ OpenClaw 是一个自托管 AI 助手网关，可以连接 WhatsApp、Telegram�
 ### 安装
 
 ```bash
-npm install -g @zi.yi/openclaw-easy
+npm install -g "@zi.yi/openclaw-easy@latest"
 ```
 
 ### 使用

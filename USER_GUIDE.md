@@ -7,7 +7,7 @@
 ## 第一步：安装
 
 ```bash
-npm install -g @zi.yi/openclaw-easy
+npm install -g "@zi.yi/openclaw-easy@latest"
 ```
 
 ---

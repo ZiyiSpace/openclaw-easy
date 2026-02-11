@@ -10,6 +10,11 @@ import { createInterface } from "node:readline";
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// 平台检测
+const isWindows = process.platform === 'win32';
+const isMac = process.platform === 'darwin';
+const isLinux = process.platform === 'linux';
+
 // 内部密钥（混淆）
 const _k = "openclaw-easy-secret-2026";
 const _0 = "d";  // API key
@@ -199,21 +204,28 @@ async function main() {
     apiKeyParam = "--zai-api-key";
   }
 
+  // 构建命令参数
+  const args = [
+    openclawCli,
+    "onboard",
+    "--non-interactive",
+    "--accept-risk",
+    "--flow",
+    "quickstart",
+    "--auth-choice",
+    authChoice,
+    apiKeyParam,
+    finalApiKey,
+  ];
+
+  // 仅在非 Windows 平台安装守护进程
+  if (!isWindows) {
+    args.push("--install-daemon");
+  }
+
   const run = spawnSync(
     process.execPath,
-    [
-      openclawCli,
-      "onboard",
-      "--non-interactive",
-      "--accept-risk",
-      "--flow",
-      "quickstart",
-      "--auth-choice",
-      authChoice,
-      apiKeyParam,
-      finalApiKey,
-      "--install-daemon"
-    ],
+    args,
     {
       stdio: "inherit",
       env: {
@@ -233,16 +245,32 @@ async function main() {
   if (finalModel && run.status === 0) {
     updateOpenClawConfig(finalModel);
 
-    // 停止 gateway（LaunchAgent 会自动重启）
-    console.log("\n正在重启 OpenClaw Gateway...");
-    spawnSync(
-      process.execPath,
-      [openclawCli, "gateway", "--stop"],
-      { stdio: "inherit" }
-    );
-    console.log("\n✓ 配置完成！Gateway 正在自动启动...");
-    console.log("\n运行以下命令打开控制面板：");
-    console.log("  npx openclaw dashboard");
+    if (isWindows) {
+      // Windows：手动启动提示
+      console.log("\n✓ 配置完成！");
+      console.log("\n" + "=".repeat(50));
+      console.log("Windows 用户请手动启动：");
+      console.log("=".repeat(50));
+      console.log("\n【第一步】在当前终端启动 Gateway：");
+      console.log("  npx openclaw gateway");
+      console.log("\n⚠️  请保持此终端窗口开启，关闭会停止服务");
+      console.log("\n【第二步】打开新的终端，启动控制面板：");
+      console.log("  npx openclaw dashboard");
+      console.log("\n" + "=".repeat(50));
+      console.log("💡 提示：推荐使用 WSL2 获得完整的后台运行体验");
+      console.log("=".repeat(50) + "\n");
+    } else {
+      // macOS/Linux：自动重启
+      console.log("\n正在重启 OpenClaw Gateway...");
+      spawnSync(
+        process.execPath,
+        [openclawCli, "gateway", "--stop"],
+        { stdio: "inherit" }
+      );
+      console.log("\n✓ 配置完成！Gateway 正在自动启动...");
+      console.log("\n运行以下命令打开控制面板：");
+      console.log("  npx openclaw dashboard");
+    }
   }
 
   process.exit(run.status ?? 1);

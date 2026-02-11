@@ -62,6 +62,30 @@ openclaw-easy --openai-key sk-你的key
 
 ---
 
+## 平台说明
+
+### macOS / Linux
+
+配置完成后自动启动守护进程，开机自启，无需手动干预。
+
+### Windows
+
+由于 Windows 原生不支持守护进程，需要手动启动：
+
+```bash
+# 终端1：启动 Gateway（保持开启）
+npx openclaw gateway
+
+# 终端2：打开控制面板
+npx openclaw dashboard
+```
+
+⚠️ **Gateway 终端窗口不能关闭**，关闭会停止服务。
+
+💡 **推荐**：Windows 用户使用 WSL2 获得完整体验，详见 [Windows 使用手册](windows-使用手册.md)
+
+---
+
 ## 删除 / 重装
 
 **完全卸载（重新安装前执行）：**

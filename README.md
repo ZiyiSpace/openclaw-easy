@@ -93,10 +93,21 @@ A: 内置的是 OpenRouter Trinity 模型，适合日常使用。
 
 A: 编辑 `~/.openclaw/.env`，修改 `OPENCLAW_MODEL` 环境变量。
 
+### Q: Windows 安装时出现 node-llama-cpp 错误？
+
+A: 这是 Windows 上的已知问题，**不影响使用**。解决方案：
+
+```powershell
+# 使用 --ignore-scripts 跳过本地模型组件安装
+npm install -g "@zi.yi/openclaw-easy@latest" --ignore-scripts
+```
+
+**说明**：`node-llama-cpp` 仅用于本地模型推理，使用云端 API（如内置的 Trinity 模型）不需要它。
+
 ### Q: 卸载怎么办？
 
 ```bash
-npm uninstall -g @zi.yi/openclaw-easy
+npm uninstall -g "@zi.yi/openclaw-easy"
 npx openclaw uninstall  # 完全卸载 OpenClaw
 ```
 

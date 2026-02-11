@@ -113,6 +113,17 @@ npx openclaw dashboard
 
 ## 常见问题
 
+### Q: 安装时出现 node-llama-cpp postinstall 错误？
+
+A: 这是 Windows 上的已知问题，**不影响使用**。解决方案：
+
+```powershell
+# 使用 --ignore-scripts 跳过本地模型组件安装
+npm install -g "@zi.yi/openclaw-easy@latest" --ignore-scripts
+```
+
+**说明**：`node-llama-cpp` 仅用于本地模型推理，使用云端 API（如内置的 Trinity 模型）不需要它。内置的 OpenRouter Trinity 模型完全在云端运行，不受影响。
+
 ### Q: Windows 原生运行时提示缺少模块？
 
 A: 某些 OpenClaw 功能依赖 Unix 环境，Windows 原生支持有限。建议使用 WSL2。

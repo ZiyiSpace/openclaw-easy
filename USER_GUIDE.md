@@ -180,6 +180,19 @@ npm install -g "@zi.yi/openclaw-easy@latest"
 
 ## 遇到问题？
 
+### Windows 安装时出现 node-llama-cpp 错误？
+
+如果安装时看到类似 `node-llama-cpp postinstall error 3221225477` 的错误：
+
+```powershell
+# 使用 --ignore-scripts 跳过本地模型组件安装
+npm install -g "@zi.yi/openclaw-easy@latest" --ignore-scripts
+```
+
+**这不影响使用！** `node-llama-cpp` 仅用于本地模型推理，使用云端 API（如内置的 Trinity 模型）不需要它。
+
+---
+
 **发消息没反应？**
 
 1. 确认浏览器打开了完整 URL（包含 token）

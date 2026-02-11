@@ -18,14 +18,51 @@ npm install -g "@zi.yi/openclaw-easy@latest"
 openclaw-easy
 ```
 
-看到这个就成功了：
+**看到这个就成功了：**
+
 ```
+✓ 使用内置免费 API key
+Updated ~/.openclaw/openclaw.json
+Workspace OK: ~/.openclaw/workspace
+Sessions OK: ~/.openclaw/agents/main/sessions
+✓ 已使用内置免费模型
+
+[macOS/Linux]
+正在重启 OpenClaw Gateway...
 ✓ 配置完成！Gateway 正在自动启动...
+
+运行以下命令打开控制面板：
+  npx openclaw dashboard
+
+[Windows]
+==================================================
+                    ✅ 配置完成！
+==================================================
+
+正在启动 OpenClaw Gateway...
+⚠️  请保持此窗口开启，关闭会停止服务
+
+打开新终端，运行以下命令打开控制面板：
+  npx openclaw dashboard
+
+==================================================
 ```
 
 ---
 
 ## 第三步：开始对话
+
+### macOS / Linux
+
+```bash
+npx openclaw dashboard
+```
+
+**Gateway 自动在后台运行**，关闭终端也不影响。
+
+### Windows
+
+**打开新的 PowerShell 窗口：**
 
 ```bash
 npx openclaw dashboard
@@ -50,15 +87,31 @@ npx openclaw dashboard
 ## 使用自己的 API Key（可选）
 
 ```bash
-openclaw-easy --openai-key sk-你的key
+# 命令行参数
+openclaw-easy --openai-key sk-your-api-key-here
+
+# 或环境变量
+export OPENAI_API_KEY=sk-your-api-key-here
+openclaw-easy
+```
+
+系统会提示你选择：
+
+```
+检测到你提供了自己的 API key。
+  [1] 使用你自己的 API key
+  [2] 使用内置的免费 API key
+
+请选择 [1/2]（默认 1）：
 ```
 
 ---
 
 ## 内置配置
 
-- 模型：`arcee-ai/trinity-large-preview:free` (OpenRouter)
-- 完全免费，开箱即用
+- **模型**：`arcee-ai/trinity-large-preview:free` (OpenRouter Trinity)
+- **提供商**：OpenRouter
+- **完全免费**，开箱即用
 
 ---
 
@@ -68,15 +121,21 @@ openclaw-easy --openai-key sk-你的key
 
 配置完成后自动启动守护进程，开机自启，无需手动干预。
 
+**运行 `npx openclaw status` 可查看服务状态。**
+
 ### Windows
 
-配置完成后 **Gateway 会自动启动**（版本 1.0.6+）：
+**版本 1.0.6+ 会自动启动 Gateway**：
 
-```bash
-# 终端1：自动运行中（保持开启）
-# Gateway 已在运行，无需手动启动
+```
+✅ 配置完成！
+正在启动 OpenClaw Gateway...
+```
 
-# 打开新终端，运行控制面板
+- **终端 1**：Gateway 自动运行中（保持开启）
+- **终端 2**：打开控制面板
+
+```
 npx openclaw dashboard
 ```
 
@@ -89,6 +148,7 @@ npx openclaw dashboard
 ## 删除 / 重装
 
 **完全卸载（重新安装前执行）：**
+
 ```bash
 # 停止服务
 launchctl bootout gui/$(id -u)/ai.openclaw.gateway 2>/dev/null
@@ -98,10 +158,11 @@ rm -f ~/Library/LaunchAgents/com.openclaw.gateway.plist
 rm -rf ~/.openclaw
 
 # 卸载 npm 包
-npm uninstall -g @zi.yi/openclaw-easy
+npm uninstall -g "@zi.yi/openclaw-easy"
 ```
 
 **卸载 OpenClaw（保留 npm 包）：**
+
 ```bash
 # 完全卸载 OpenClaw
 npx openclaw uninstall
@@ -109,22 +170,33 @@ npx openclaw uninstall
 
 ---
 
+## 更新到最新版本
+
+```bash
+npm install -g "@zi.yi/openclaw-easy@latest"
+```
+
+---
+
 ## 遇到问题？
 
 **发消息没反应？**
+
 1. 确认浏览器打开了完整 URL（包含 token）
 2. 运行 `npx openclaw status` 检查服务
 3. 运行 `npx openclaw logs` 查看日志
 
-**重启服务：**
+**重启服务（macOS/Linux）：**
+
 ```bash
 launchctl bootout gui/$(id -u)/ai.openclaw.gateway 2>/dev/null
 launchctl load ~/Library/LaunchAgents/ai.openclaw.gateway.plist 2>/dev/null
 ```
 
 **卸载：**
+
 ```bash
-npm uninstall -g @zi.yi/openclaw-easy
+npm uninstall -g "@zi.yi/openclaw-easy"
 npx openclaw uninstall
 ```
 
